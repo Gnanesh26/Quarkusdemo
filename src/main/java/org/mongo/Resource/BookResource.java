@@ -29,11 +29,24 @@ public class BookResource {
         book.persist();
         return Response.status(Response.Status.CREATED).entity(book).build();
     }
-//    @GET
-//    @Path("/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Operation(summary = "Get a book by ID")
-//    public Book getBookById(@PathParam("id") String id) {
-//        return Book.findById(new ObjectId(id));
-//    }
+
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Get a book by ID")
+    public Book getBookById(@PathParam("id") String id) {
+        return Book.findById(new ObjectId(id));
+    }
+
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Delete a book by id")
+    public Response deleteBook(@PathParam("id") ObjectId id) {
+        Book.deleteById(id);
+        return Response.status(Response.Status.OK).build();
+    }
 }

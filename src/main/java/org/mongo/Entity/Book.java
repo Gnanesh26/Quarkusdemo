@@ -31,6 +31,8 @@ public class Book extends PanacheMongoEntity {
     public Book() {
     }
 
+
+
     public String getTitle() {
         return title;
     }
