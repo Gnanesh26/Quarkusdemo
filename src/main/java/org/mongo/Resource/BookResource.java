@@ -10,8 +10,12 @@ import org.mongo.Entity.Book;
 
 import java.util.List;
 
+
+
+
 @Path("/books")
 public class BookResource {
+
 
     @GET
     @Operation(summary = "Get a list of books")
@@ -49,4 +53,40 @@ public class BookResource {
         Book.deleteById(id);
         return Response.status(Response.Status.OK).build();
     }
+
+    @PUT
+    @Path("/updateBook")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Update book pages and rating by title")
+    public Response updateBookPagesAndRatingByTitle(Book updatedBook) {
+        String title = updatedBook.getTitle();
+        int newPages = updatedBook.getPages();
+        double newRating = updatedBook.getRating();
+
+
+        // Find the existing book by title in MongoDB
+        Book existingBook = Book.find("title", title).firstResult();
+
+        if (existingBook == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Book not found").build();
+        }
+
+        // Update the properties of the existing book
+        existingBook.setPages(newPages);
+        existingBook.setRating(newRating);
+
+        // Save the changes to the database
+        existingBook.update();
+
+        // Return the updated book
+        return Response.ok(existingBook).build();
+    }
 }
+
+
+
+
+
+
+
