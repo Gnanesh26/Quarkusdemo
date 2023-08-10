@@ -20,6 +20,7 @@ public class Book extends PanacheMongoEntity {
     @JsonbProperty("rating")
     public double rating;
 
+
     public Book(String title, String author, int pages, String genres, double rating) {
         this.title = title;
         this.author = author;
