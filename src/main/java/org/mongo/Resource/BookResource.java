@@ -14,8 +14,9 @@ import java.util.List;
 
 
 @Path("/books")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
-
 
     @GET
     @Operation(summary = "Get a list of books")
@@ -26,8 +27,6 @@ public class BookResource {
 
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Create a new book")
     public Response createBook(Book book) {
         book.persist();
@@ -37,7 +36,6 @@ public class BookResource {
 
     @GET
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Get a book by ID")
     public Book getBookById(@PathParam("id") String id) {
         return Book.findById(new ObjectId(id));
@@ -46,8 +44,6 @@ public class BookResource {
 
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Delete a book by id")
     public Response deleteBook(@PathParam("id") ObjectId id) {
         Book.deleteById(id);
@@ -56,14 +52,10 @@ public class BookResource {
 
     @PUT
     @Path("/updateBook")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Update book pages and rating by title")
     public Response updateBookPagesAndRatingByTitle(Book updatedBook) {
         String title = updatedBook.getTitle();
         int newPages = updatedBook.getPages();
-        double newRating = updatedBook.getRating();
-
 
         // Find the existing book by title in MongoDB
         Book existingBook = Book.find("title", title).firstResult();
@@ -74,12 +66,10 @@ public class BookResource {
 
         // Update the properties of the existing book
         existingBook.setPages(newPages);
-        existingBook.setRating(newRating);
 
-        // Save the changes to the database
+        // Save the changes to the db
         existingBook.update();
 
-        // Return the updated book
         return Response.ok(existingBook).build();
     }
 }
