@@ -3,7 +3,6 @@ package org.mongo.Entity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 import org.bson.types.ObjectId;
 
-import java.util.List;
 
 @MongoEntity(collection = "authors")
 public class Author {
