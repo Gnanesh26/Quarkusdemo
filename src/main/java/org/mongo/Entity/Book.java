@@ -1,23 +1,23 @@
 package org.mongo.Entity;
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
-import jakarta.json.bind.annotation.JsonbProperty;
+import org.bson.types.ObjectId;
 
 @MongoEntity(collection="books")
 public class Book extends PanacheMongoEntity {
-    @JsonbProperty("title")
+
     public String title;
 
-    @JsonbProperty("author")
+
     public String author;
 
-    @JsonbProperty("pages")
+
     public int pages;
 
-    @JsonbProperty("genres")
+
     public String genres;
 
-    @JsonbProperty("rating")
+
     public double rating;
 
 
@@ -74,4 +74,5 @@ public class Book extends PanacheMongoEntity {
         this.rating = rating;
     }
 }
+
 

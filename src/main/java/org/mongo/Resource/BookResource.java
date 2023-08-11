@@ -8,10 +8,8 @@ import org.bson.types.ObjectId;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.mongo.Entity.Book;
 
+
 import java.util.List;
-
-
-
 
 @Path("/books")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -73,6 +71,10 @@ public class BookResource {
         return Response.ok(existingBook).build();
     }
 }
+
+
+
+
 
 
 
