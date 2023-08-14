@@ -22,6 +22,8 @@ public class Poem extends PanacheMongoEntity {
     public Poem() {
     }
 
+
+
     public String getGenre() {
         return genre;
     }
